@@ -1,0 +1,27 @@
+{% set title = 'Sign Up' %} {% set question = 'Already have an account?' %} {%
+set nameLink = 'Log In' %} {% set link = './sign-in' %} {% extends './base.html'
+%} {% block content %}
+
+<main class="content">
+  <div class="content__wrapper">
+    <form action="#" class="form set-form">
+      <div class="form__content">
+        <h2 class="form__title">Sign up</h2>
+        <div class="names">
+          <input
+            type="text"
+            class="form__input pdng"
+            placeholder="First name"
+          />
+          <input type="text" class="form__input" placeholder="Last name" />
+        </div>
+
+        <input type="text" class="form__input" placeholder="Username" />
+        <input type="text" class="form__input mrgn" placeholder="E-mail" />
+        <button class="btn btn_down">Get started</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+{% endblock %}

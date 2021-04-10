@@ -1,0 +1,57 @@
+{% set breadcrumbs__item1 = 'Home' %} {% set breadcrumbs__item2 = 'My profile'
+%} {% set status2 = 'sidebar__menu-item_active' %} {% set title = 'Profile' %}
+{% set srcImgSearch = './images/sidebar/search-icon.svg' %} {% set srcImgUser =
+'./images/sidebar/user-icon_active.svg' %} {% extends './profile/prof-base.html'
+%} {% block content %}
+<main class="content">
+  <div class="content__wrapper">
+    <section class="container">
+      <div class="container__card">
+        <div class="card__titles">
+          <a class="card__title" href="./profile-info">PERSONAL INFORMATION</a>
+          <a class="card__title card__title_active" href="#"
+            >ACCOUNT INFORMATION</a
+          >
+        </div>
+
+        <div class="card__information">
+          <div class="user-data">
+            <div class="user-data__item">
+              <h3 class="item__title">USERNAME</h3>
+              <input
+                class="item__input"
+                type="text"
+                name="first name"
+                value="sarahbarnes"
+              />
+            </div>
+
+            <div class="user-data__item">
+              <h3 class="item__title">E-MAIL</h3>
+              <input
+                class="item__input"
+                type="text"
+                name="last name"
+                value="sarahbbb@gmail.com"
+              />
+            </div>
+
+            <div class="user-data__item-block">
+              <div class="user-data__item user-data__item-flexend">
+                <a href="#" class="item__link"
+                  >CHANGE PASSWORD
+                  <img
+                    class="item__link-vector"
+                    src="./images/Vector.svg"
+                    alt=""
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %}

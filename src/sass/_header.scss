@@ -1,0 +1,100 @@
+.header {
+  width: 100%;
+}
+
+.header__text {
+  color: #222428;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: 0.28px;
+  line-height: 19px;
+
+  .header__signup-link {
+    color: #062fb3;
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
+
+select {
+  padding-right: 15px;
+  border: none;
+  outline: none;
+  -webkit-appearance: none; 
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.28px;
+
+  color: #252F48;
+}
+
+.logo {
+  width: 138px;
+  height: 36px;
+
+  .logo__link {
+    width: 100%;
+  }
+}
+
+.profile-header {
+  grid-area: head;
+  background: #FFFFFF;
+  border-bottom: 1px solid #DAE4F2;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 61px;
+
+  .user-list {
+    display: flex;
+  
+    &__img {
+      padding-right: 9px;
+    }
+  }
+}
+
+
+.breadcrumbs__items {
+  padding: 10px; 
+
+  .breadcrumbs__item {
+    display: inline;
+    
+    &:not(:last-of-type)::after  {
+      content: '❯';
+      margin: 0 10px;
+      font-size: 13px;
+      color: #0AD69C;
+    }
+
+    .breadcrumbs__link {
+      text-decoration: none;
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 15px;
+      letter-spacing: 0.685714px;
+      color: #252F48;
+      cursor: pointer;
+  
+      &:hover {
+        color: #002396;
+        text-decoration: underline;
+      }
+    }
+  
+    .link_active {
+      color: #002396;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{% set title = 'Sign In' %} {% set question = 'Do not have an account?' %} {%
+set nameLink = 'Sign up' %} {% set link = './sign-up' %} {% extends
+'./base.html' %} {% block content %}
+
+<main class="content">
+  <div class="content__wrapper">
+    <form action="#" class="form set-form">
+      <div class="form__content">
+        <h2 class="form__title">Sign In</h2>
+        <input type="text" class="form__input" placeholder="Login or E-mail" />
+        <input
+          type="password"
+          class="form__input password"
+          placeholder="Password"
+        />
+        <p class="form__pass-forgot">
+          <a href="pass-recovery.html">Forgot password?</a>
+        </p>
+        <button class="btn">Sign in</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+{% endblock %}

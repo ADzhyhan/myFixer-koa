@@ -1,0 +1,100 @@
+{% set breadcrumbs__item1 = 'Home' %} {% set breadcrumbs__item2 = 'My profile'
+%} {% set status2 = 'sidebar__menu-item_active' %} {% set title = 'Profile' %}
+{% set srcImgSearch = './images/sidebar/search-icon.svg' %} {% set srcImgUser =
+'./images/sidebar/user-icon_active.svg' %} {% extends './profile/prof-base.html'
+%} {% block content%}
+<main class="content">
+  <div class="content__wrapper">
+    <section class="container">
+      <div class="container__card">
+        <div class="card__titles">
+          <a class="card__title card__title_active" href="#"
+            >PERSONAL INFORMATION</a
+          >
+          <a class="card__title" href="./profile-account"
+            >ACCOUNT INFORMATION</a
+          >
+        </div>
+
+        <div class="card__information">
+          <div class="profile-photo">
+            <div class="profile-photo__image">
+              <img
+                src="./images/profile/profile-photo.svg"
+                alt="profile photo"
+              />
+            </div>
+
+            <div class="profile-photo__change-image">
+              <img src="./images/profile/pen.svg" alt="pen" />
+              <a href="#" class="change-image__link">Change photo</a>
+            </div>
+          </div>
+
+          <div class="user-data">
+            <div class="user-data__item">
+              <h3 class="item__title">FIRST NAME</h3>
+              <input
+                class="item__input"
+                type="text"
+                name="first name"
+                value="Faruh"
+              />
+            </div>
+
+            <div class="user-data__item">
+              <h3 class="item__title">LAST NAME</h3>
+              <input
+                class="item__input"
+                type="text"
+                name="last name"
+                value="Bernandez"
+              />
+            </div>
+
+            <div class="user-data__item">
+              <h3 class="item__title">TITLE</h3>
+
+              <select class="item__select" name="select gender">
+                <option>Mr</option>
+                <option>Mrs</option>
+              </select>
+            </div>
+
+            <div class="user-data__item">
+              <h3 class="item__title">MOBILE PHONE</h3>
+              <div class="item__phone">
+                <select class="item__select item__select-mobile">
+                  <option></option>
+                  <option></option>
+                </select>
+                <input
+                  class="item__input"
+                  type="text"
+                  name="phone"
+                  value="+65"
+                />
+              </div>
+            </div>
+
+            <div class="user-data__item">
+              <h3 class="item__title">COUNTRY</h3>
+
+              <select class="item__select item__select-icon">
+                <option value=""></option>
+                <option value="Turkey">Turkey</option>
+                <option value="Ukraine">Ukraine</option>
+              </select>
+            </div>
+
+            <div class="user-data__item">
+              <h3 class="item__title">COMPANY</h3>
+              <input type="text" name="company" class="item__input" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %}

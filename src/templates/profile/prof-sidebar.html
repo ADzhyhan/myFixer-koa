@@ -1,0 +1,37 @@
+<aside class="sidebar">
+  <div class="sidebar__wrapper">
+    <div class="logo sidebar__logo">
+      <img
+        src="./images/sidebar/side-logo.svg"
+        alt="myFixer"
+        class="logo__image"
+      />
+    </div>
+
+    <nav class="sidebar__menu">
+      <div class="sidebar__menu-item {{ status1 }}">
+        <a href="./search-results">
+          <img src="{{ srcImgSearch }}" alt="search" />
+        </a>
+      </div>
+
+      <div class="sidebar__menu-item {{ status2 }}">
+        <a href="./profile-info">
+          <img src="{{ srcImgUser }}" alt="user-profile" />
+        </a>
+      </div>
+
+      <div class="sidebar__menu-item {{ status3 }}">
+        <a href="#">
+          <img src="./images/sidebar/messages-icon.svg" alt="messages" />
+        </a>
+      </div>
+
+      <div class="sidebar__menu-item {{ status4 }}">
+        <a href="#">
+          <img src="./images/sidebar/calendar-icon.svg" alt="calendar" />
+        </a>
+      </div>
+    </nav>
+  </div>
+</aside>

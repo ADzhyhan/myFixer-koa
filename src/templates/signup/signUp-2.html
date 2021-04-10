@@ -1,0 +1,69 @@
+{% set title = 'Sign Up' %} {% set question = 'Already have an account?' %} {%
+set nameLink = 'Log In' %} {% set link = './sign-in' %} {% extends './base.html'
+%} {% block content %}
+
+<main class="content">
+  <div class="content__wrapper">
+    <form action="#" class="form set-form">
+      <div class="form__content">
+        <h2 class="form__title title-color">Complete your account</h2>
+        <input
+          type="password"
+          class="form__input mrgn"
+          placeholder="Create a password"
+        />
+
+        <div class="form__indicator-password">
+          <span class=""></span>
+          <span class=""></span>
+          <span class=""></span>
+        </div>
+
+        <input
+          type="password"
+          class="form__input"
+          placeholder="Confirm password"
+        />
+
+        <div class="agrees">
+          <div class="agrees__item mb-15">
+            <input
+              type="checkbox"
+              class="agrees__checkbox"
+              id="terms"
+              name="terms"
+              checked
+            />
+            <label class="agrees__label" for="terms">
+              I agree to the myFixer.com
+              <a class="agrees__link" href="#">Terms of Service</a>
+            </label>
+          </div>
+
+          <div class="agrees__item">
+            <input
+              type="checkbox"
+              class="agrees__checkbox"
+              id="policy"
+              name="policy"
+            />
+            <label class="agrees__label" for="policy">
+              I agree to the myFixer.com
+              <a class="agrees__link" href="#">Privacy Policy</a>
+            </label>
+          </div>
+        </div>
+
+        <div
+          class="g-recaptcha"
+          data-sitekey="6LcpFYIaAAAAAAjHXMNpcMMZ8ix0mZwjfVTeGL8Z"
+        ></div>
+
+        <button class="btn btn_down">Done!</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<script src="https://www.google.com/recaptcha/api.js?hl=en"></script>
+{% endblock %}

@@ -1,0 +1,39 @@
+.sidebar {
+  // grid-area: side;
+  background: #01134E;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 80px;
+  height: 100vh;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__logo { 
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 18px;
+  } 
+
+  &__menu {
+    margin-top: 86px;
+
+    &-item {
+      margin-top: 18px;
+      padding: 20px 28px 20px 28px;
+      text-align: center;
+
+      &_active {
+        border-left: 4px solid #0AD69C;
+        
+      }
+    }
+  }
+
+}
