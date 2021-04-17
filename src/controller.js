@@ -1,3 +1,6 @@
+const db = require('./db/db');
+const validator = require('./validator');
+
 const controllerPages = {
   async index(ctx) {
     await ctx.render('index');
@@ -53,6 +56,36 @@ const controllerPages = {
 
 };
 
+async function getUser(ctx) {
+  const { userId } = ctx.request.params;
+  const userResponse = await db.query(`SELECT * FROM "user" WHERE id = ${userId}`);
+  if (!userResponse.rowCount) {
+    ctx.throw(400, 'User doesn`t exist');
+  }
+  const name = userResponse.rows[0].fname;
+
+  await ctx.render('index', { name });
+}
+
+async function createUser(ctx) {
+  const { body } = ctx.request;
+
+  await validator.userSchema.validateAsync(body);
+
+  const createUserResponse = await db.query(`INSERT INTO  "user" (fname, lname, active) VALUES ('${body.fname}', '${body.lname}', '${body.active}') RETURNING *`);
+
+  const user = { ...createUserResponse.rows[0] };
+
+  ctx.status = 201;
+  ctx.body = {
+    id: user.id,
+    fname: user.fname,
+    lname: user.lname,
+  };
+}
+
 module.exports = {
   controllerPages,
+  createUser,
+  getUser,
 };

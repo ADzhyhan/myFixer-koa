@@ -18,6 +18,9 @@ router.get('search-results', controllers.controllerPages.search_results);
 router.get('search-map', controllers.controllerPages.search_map);
 router.get('admin', controllers.controllerPages.admin);
 
+router.get('user/:userId', controllers.getUser);
+router.post('user', controllers.createUser);
+
 module.exports = {
   router,
 };
