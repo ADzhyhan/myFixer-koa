@@ -20,6 +20,7 @@ router.get('admin', controllers.controllerPages.admin);
 
 router.get('user/:userId', controllers.getUser);
 router.post('user', controllers.createUser);
+router.post('login', controllers.logIn);
 
 module.exports = {
   router,

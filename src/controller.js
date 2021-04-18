@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const db = require('./db/db');
 const validator = require('./validator');
 
@@ -72,7 +73,9 @@ async function createUser(ctx) {
 
   await validator.userSchema.validateAsync(body);
 
-  const createUserResponse = await db.query(`INSERT INTO  "user" (fname, lname, active, password, email) VALUES ('${body.fname}', '${body.lname}', ${body.active}, ${body.password}, ${body.email}) RETURNING *`);
+  body.password = crypto.pbkdf2Sync(body.password, 'salt', 100000, 64, 'sha256').toString('hex');
+
+  const createUserResponse = await db.query(`INSERT INTO  "user" (fname, lname, active, password, email) VALUES ('${body.fname}', '${body.lname}', ${body.active}, '${body.password}', '${body.email}') RETURNING *`);
 
   const user = { ...createUserResponse.rows[0] };
 
@@ -85,8 +88,31 @@ async function createUser(ctx) {
   };
 }
 
+async function logIn(ctx) {
+  const { body } = ctx.request;
+
+  body.password = crypto.pbkdf2Sync(body.password, 'salt', 100000, 64, 'sha256').toString('hex');
+
+  const userResponse = await db.query(`SELECT * FROM "user" WHERE email = '${body.email}'`);
+
+  if (!userResponse.rowCount) {
+    ctx.throw(400, `User with email: ${body.email} doesn't exist`);
+  }
+
+  const user = { ...userResponse.rows[0] };
+
+  ctx.status = 200;
+  ctx.body = {
+    id: user.id,
+    email: user.email,
+    fname: user.fname,
+    lname: user.lname,
+  };
+}
+
 module.exports = {
   controllerPages,
   createUser,
   getUser,
+  logIn,
 };

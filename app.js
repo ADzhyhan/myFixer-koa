@@ -2,7 +2,7 @@ const Koa = require('koa');
 const path = require('path');
 const Router = require('koa-router');
 const views = require('koa-views');
-const Redis = require('ioredis');
+// const Redis = require('ioredis');
 const bodyParser = require('koa-bodyparser');
 const serve = require('koa-static');
 const nunjucks = require('nunjucks');
@@ -23,7 +23,7 @@ app.use(async (ctx, next) => {
     if (err.isJoi) {
       ctx.throw(400, err.details[0].message);
     }
-    ctx.throw(400, 'Something wrong');
+    ctx.throw(err.status || 500, err.message);
   }
 });
 
