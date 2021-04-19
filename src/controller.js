@@ -1,7 +1,13 @@
 const crypto = require('crypto');
 const passport = require('koa-passport');
+const dotenv = require('dotenv');
+const jwt = require('jwt-simple');
 const db = require('./db/db');
 const validator = require('./validator');
+
+const { UserDB } = require('./models/user/UserDB');
+
+dotenv.config();
 
 const controllerPages = {
   async index(ctx) {
@@ -58,15 +64,18 @@ const controllerPages = {
 
 };
 
-async function getUser(ctx) {
-  const { userId } = ctx.request.params;
-  const userResponse = await db.query(`SELECT * FROM "user" WHERE id = ${userId}`);
-  if (!userResponse.rowCount) {
-    ctx.throw(400, 'User doesn`t exist');
-  }
-  const name = userResponse.rows[0].fname;
+async function profile(ctx) {
+  // const { userId } = ctx.request.params;
+  // const userResponse = await db.query(`SELECT * FROM "user" WHERE id = ${userId}`);
+  // if (!userResponse.rowCount) {
+  //   ctx.throw(400, 'User doesn`t exist');
+  // }
+  // const name = userResponse.rows[0].fname;
 
-  await ctx.render('index', { name });
+  // await ctx.render('index', { name });
+  ctx.body = {
+    success: true,
+  };
 }
 
 async function createUser(ctx) {
@@ -102,9 +111,40 @@ async function logIn(ctx) {
   })(ctx);
 }
 
+async function refresh(ctx) {
+  const token = ctx.headers.authorization.split(' ')[1];
+  const decodedToken = jwt.decode(token, process.env.refreshTokenKey);
+
+  if (decodedToken.expiresIn <= new Date().getTime()) {
+    const error = new Error('Refresh token expired, please sign in into your account.');
+    error.status = 400;
+
+    throw error;
+  }
+
+  const user = await UserDB.getUserByEmail(decodedToken.email);
+
+  const accessToken = {
+    id: user.id,
+    expiresIn: new Date().setTime(new Date().getTime() + 200000),
+  };
+  const refreshToken = {
+    email: user.email,
+    expiresIn: new Date().setTime(new Date().getTime() + 1000000),
+  };
+
+  ctx.body = {
+    accessToken: jwt.encode(accessToken, process.env.secretKey),
+    accessTokenExpirationDate: accessToken.expiresIn,
+    refreshToken: jwt.encode(refreshToken, process.env.refreshTokenKey),
+    refreshTokenExpirationDate: refreshToken.expiresIn,
+  };
+}
+
 module.exports = {
   controllerPages,
   createUser,
-  getUser,
+  profile,
   logIn,
+  refresh,
 };
