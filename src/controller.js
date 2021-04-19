@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const passport = require('koa-passport');
 const db = require('./db/db');
 const validator = require('./validator');
 
@@ -89,25 +90,16 @@ async function createUser(ctx) {
 }
 
 async function logIn(ctx) {
-  const { body } = ctx.request;
-
-  body.password = crypto.pbkdf2Sync(body.password, 'salt', 100000, 64, 'sha256').toString('hex');
-
-  const userResponse = await db.query(`SELECT * FROM "user" WHERE email = '${body.email}'`);
-
-  if (!userResponse.rowCount) {
-    ctx.throw(400, `User with email: ${body.email} doesn't exist`);
-  }
-
-  const user = { ...userResponse.rows[0] };
-
-  ctx.status = 200;
-  ctx.body = {
-    id: user.id,
-    email: user.email,
-    fname: user.fname,
-    lname: user.lname,
-  };
+  await passport.authenticate('local', (err, user) => {
+    if (user) {
+      ctx.body = user;
+    } else {
+      ctx.status = 400;
+      if (err) {
+        ctx.body = { error: err };
+      }
+    }
+  })(ctx);
 }
 
 module.exports = {

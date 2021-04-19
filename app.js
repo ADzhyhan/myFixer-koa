@@ -8,6 +8,9 @@ const serve = require('koa-static');
 const nunjucks = require('nunjucks');
 
 const globalRouter = require('./src/router');
+const passport = require('./src/libs/passport/koaPassport');
+
+passport.initialize();
 
 const app = new Koa();
 
@@ -23,6 +26,11 @@ app.use(async (ctx, next) => {
     if (err.isJoi) {
       ctx.throw(400, err.details[0].message);
     }
+
+    if (err.isPassport) {
+      ctx.throw(400, err.message);
+    }
+
     ctx.throw(err.status || 500, err.message);
   }
 });
